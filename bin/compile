@@ -44,16 +44,23 @@ mkdir tmp
 cd tmp
  
 git clone https://github.com/php/php-src.git -b PHP-5.3
+
+echo "--------> done with cloning"
  
 cd php-src
 cd ext/zlib
- 
+
+echo "-------> compiling to compile" 
 /app/php/bin/phpize
  
 ./configure –with-php-config=/app/php/bin/php-config
- 
+
+echo "-------> running make"
+
 make
- 
+
+echo "-------> make ran: hurrraaaaay" 
+
 cd modules
  
 scp zlib.so user@host:~/destination
