@@ -44,11 +44,11 @@ mkdir tmp
 cd tmp
 
 
-echo "Cloning php 5.3 from git"
+echo "--------> Cloning php 5.3 from git"
  
 git clone https://github.com/php/php-src.git -b PHP-5.3
 
-echo "--------> done with cloning"
+echo "--------> Done with cloning"
  
 cd php-src
 cd ext/zlib
