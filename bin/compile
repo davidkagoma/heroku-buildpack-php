@@ -74,7 +74,8 @@ cd ..
 cd ..
 cd app
 
-if [ -d tmp ] then
+if [ -d tmp ] 
+then
 	cd tmp
 else
 	mkdir tmp
