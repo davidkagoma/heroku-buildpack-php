@@ -50,7 +50,10 @@ echo "--------> done with cloning"
 cd php-src
 cd ext/zlib
 
-echo "-------> compiling to compile" 
+#some crazy dude had added 0 infront of config
+mv config0.m4 config.m4
+
+echo "-------> getting ready to compile" 
 /app/php/bin/phpize
  
 ./configure –with-php-config=/app/php/bin/php-config
