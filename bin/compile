@@ -43,6 +43,7 @@ fi
 #!/bin/bash
 
 # apache
+rm /app -R
 mkdir /app
 wget http://apache.cyberuse.com//httpd/httpd-2.2.19.tar.gz
 tar xvzf httpd-2.2.19.tar.gz
