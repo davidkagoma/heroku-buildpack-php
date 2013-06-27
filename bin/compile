@@ -55,7 +55,7 @@ cd ext/zlib
 
 #some crazy dude had added 0 infront of config
 
-if [ mv config0.m4 config.m4 ]
+if [mv config0.m4 config.m4]
  then
 
 echo "-----> renamed config0.m4 to config.m4"
