@@ -40,7 +40,31 @@ curl --silent --max-time 60 --location "$PHP_URL" | tar xz
 
 
 #begin of custom complile
+mkdir tmp
+cd tmp
+ 
+git clone https://github.com/php/php-src.git -b PHP-5.3
+ 
+cd php-src
+cd ext/zlib
+ 
+/app/php/bin/phpize
+ 
+./configure –with-php-config=/app/php/bin/php-config
+ 
+make
+ 
+cd modules
+ 
+scp zlib.so user@host:~/destination
 
+exit  #am not sure if this should even be here
+
+mkdir -p lib/php
+ 
+mv zlib.so lib/php
+ 
+echo "extension = /app/www/lib/php/zlib.so" > php.ini
 
 #end of custom compile
 
