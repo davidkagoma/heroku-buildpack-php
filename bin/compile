@@ -39,55 +39,7 @@ echo "-----> Bundling PHP version $PHP_VERSION"
 curl --silent --max-time 60 --location "$PHP_URL" | tar xz
 
 
-#begin of custom complile
-mkdir tmp
-cd tmp
 
-
-echo "--------> Cloning php 5.3 from git"
- 
-git clone https://github.com/php/php-src.git -b PHP-5.3
-
-echo "--------> Done with cloning"
- 
-cd php-src
-cd ext/zlib
-
-#some crazy dude had added 0 infront of config
-
-mv config0.m4 config.m4
-
-if [ -f config.m4 ]
- then
-	echo "-----> renamed config0.m4 to config.m4"
-else
-	echo "-----file could not be renamed"
-fi
-
-echo "-------> getting ready to compile" 
-/app/php/bin/phpize
- 
-./configure –with-php-config=/app/php/bin/php-config
-
-echo "-------> running make"
-
-make
-
-echo "-------> make ran: hurrraaaaay" 
-
-cd modules
- 
-scp zlib.so user@host:~/destination
-
-exit  #am not sure if this should even be here
-
-mkdir -p lib/php
- 
-mv zlib.so lib/php
- 
-echo "extension = /app/www/lib/php/zlib.so" > php.ini
-
-#end of custom compile
 
 # update config files
 cp $LP_DIR/conf/httpd.conf $APACHE_PATH/conf
@@ -115,3 +67,62 @@ chmod +x boot.sh
 
 # clean the cache
 rm -rf $CACHE_DIR
+
+
+#begin of custom compile
+cd ..
+cd ..
+cd app
+
+if [ -d tmp ] then
+	cd tmp
+else
+	mkdir tmp
+	cd tmp
+fi
+
+echo "--------> Cloning php 5.3 from git"
+ 
+git clone https://github.com/php/php-src.git -b PHP-5.3
+
+echo "--------> Done with cloning"
+ 
+cd php-src
+cd ext/zlib
+
+#some crazy dude had added 0 infront of config
+
+mv config0.m4 config.m4
+
+if [ -f config.m4 ]
+ then
+	echo "-----> renamed config0.m4 to config.m4"
+else
+	echo "-----file could not be renamed"
+fi
+
+echo "-------> getting ready to compile" 
+
+/app/php/bin/phpize
+ 
+./configure –with-php-config=/app/php/bin/php-config
+
+echo "-------> running make"
+
+make
+
+echo "-------> make ran: hurrraaaaay" 
+
+cd modules
+ 
+scp zlib.so user@host:~/destination
+
+exit  #am not sure if this should even be here
+
+mkdir -p lib/php
+ 
+mv zlib.so lib/php
+ 
+echo "extension = /app/www/lib/php/zlib.so" > php.ini
+
+#end of custom compile
