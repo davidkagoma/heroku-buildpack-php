@@ -42,6 +42,9 @@ curl --silent --max-time 60 --location "$PHP_URL" | tar xz
 #begin of custom complile
 mkdir tmp
 cd tmp
+
+
+echo "Cloning php 5.3 from git"
  
 git clone https://github.com/php/php-src.git -b PHP-5.3
 
@@ -51,7 +54,16 @@ cd php-src
 cd ext/zlib
 
 #some crazy dude had added 0 infront of config
-mv config0.m4 config.m4
+
+if [ mv config0.m4 config.m4 ]
+ then
+
+echo "-----> renamed config0.m4 to config.m4"
+
+else
+
+echo "-----file could not be renamed"
+fi
 
 echo "-------> getting ready to compile" 
 /app/php/bin/phpize
