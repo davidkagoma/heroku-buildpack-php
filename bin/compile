@@ -103,6 +103,8 @@ fi
 
 echo "------------->> Entering sleep mode for 5minutes"
 
+cat config.m4 
+
 sleep 5m
 
 echo "-------> getting ready to compile" 
